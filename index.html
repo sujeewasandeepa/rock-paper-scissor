@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <script>
+            
+            /*
+             * This function will make the computer choose either rock, paper
+             * or scissors randomly.
+             */
+            function computerPlay() {
+                let random_no = Math.random() * 3;
+                random_no = Math.ceil(random_no);
+                let computerResult;
+                if (random_no == 1) {
+                    computerResult = "Rock";
+                } else if(random_no == 2) {
+                    computerResult = "Paper";
+                } else {
+                    computerResult = "Scissors";
+                }
+                console.log(computerResult);
+                return computerResult;
+            }
+
+            /*
+             * this function will play through a single round of rock, paper,
+             * scissors. 
+             */
+            function playRound(playerSelection, computerSelection) {
+
+            }
+        </script>
+    </body>
+</html>
