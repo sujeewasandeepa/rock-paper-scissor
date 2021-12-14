@@ -21,7 +21,6 @@
                 } else {
                     computerResult = "Scissors";
                 }
-                console.log(computerResult);
                 return computerResult;
             }
 
@@ -58,6 +57,33 @@
                     console.log("something is wrong!");
                 }
                 return didPlayerWin;
+            }
+
+            /*
+             * this function will run other functions and will allow the user to play
+             * five rounds of the game. Then will calculate the score and will decide
+             * if you the player wins or loses.
+             */
+            function game() {
+                let scoresP = 0;
+                let scoresC = 0;
+                for(let i=0; i<5; i++) {
+                    let user_input = prompt("Enter your choice!");
+                    let computer_input = computerPlay();
+                    if(playRound(user_input, computer_input)) {
+                        scoresP++;
+                    }else{
+                        scoresC++;
+                    }
+                }
+                console.log("---------------");
+                if(scoresP > scoresC) {
+                    console.log("You win!");
+                } else if(scoresP < scoresC) {
+                    console.log("You Lose!");
+                } else {
+                    console.log("DRAW!");
+                }
             }
         </script>
     </body>
