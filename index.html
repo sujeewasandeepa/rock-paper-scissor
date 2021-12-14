@@ -5,7 +5,7 @@
     </head>
     <body>
         <script>
-            
+
             /*
              * This function will make the computer choose either rock, paper
              * or scissors randomly.
@@ -30,7 +30,34 @@
              * scissors. 
              */
             function playRound(playerSelection, computerSelection) {
-
+                playerSelection = playerSelection.toLowerCase();
+                computerSelection = computerSelection.toLowerCase();
+                let didPlayerWin = false;
+                if(playerSelection=="rock" && computerSelection=="paper") {
+                    console.log("You lose! Paper beats Rock!");
+                } else if(playerSelection=="rock" && computerSelection=="scissors") {
+                    console.log("You win! Rock beats Scissors!");
+                    didPlayerWin = true;
+                } else if(playerSlection=="rock" && computerSelection=="rock") {
+                    console.log("DRAW!");
+                } else if(playerSelection=="paper" && computerSelection=="scissors") {
+                    console.log("You Lose! Scissors beats Paper!");
+                } else if(playerSlection=="paper" && computerSelection=="rock") {
+                    console.log("You win! Paper beats Rock!");
+                    didPlayerWin = true;
+                } else if(playerSelection=="paper" && computerSelection=="paper") {
+                    console.log("DRAW!");
+                } else if(playerSelection=="scissors" && computerSelection=="scissors") {
+                    console.log("DRAW!");
+                } else if(playerSelection=="scissors" && computerSelection=="rock") {
+                    console.log("You Lose! Rock beats scissors");
+                } else if(playerSelection=="scissors" && computerSelection=="paper") {
+                    console.log("You win! Scissors beats Paper!");
+                    didPlayerWin = true;
+                } else {
+                    console.log("something is wrong!");
+                }
+                return didPlayerWin;
             }
         </script>
     </body>
