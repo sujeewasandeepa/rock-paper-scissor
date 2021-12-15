@@ -4,24 +4,83 @@ const scissors = document.querySelector('#scissors');
 const display = document.querySelector('#display');
 
 let user_input;
+let scoreP = 0;
+let scoreC = 0;
+
 
 rock.addEventListener('click', () => {
     user_input = "rock";
-    playTurn();
+    display.style.background = "white";
+    let result = playTurn();
+    let playerWin = result[0];
+    let computerWin = result[1];
+    if (playerWin) {
+        scoreP ++;
+    }else if(computerWin) {
+        scoreC ++;  
+    }
+    if(scoreC == 5 || scoreP == 5) {
+        victory(scoreP, scoreC);
+        scoreC = 0;
+        scoreP = 0;
+    }
+    
 });
 paper.addEventListener('click', () => {
     user_input = "paper";
-    playTurn();
+    display.style.background = "white";
+    let result = playTurn();
+    let playerWin = result[0];
+    let computerWin = result[1];
+    if (playerWin) {
+        scoreP ++;
+    }
+    if(computerWin) {
+        scoreC ++;  
+    }
+    if(scoreC == 5 || scoreP == 5) {
+        victory(scoreP, scoreC);
+        scoreC = 0;
+        scoreP = 0;
+    }
 });
 scissors.addEventListener('click', () => {
     user_input = "scissors";
-    playTurn();
+    display.style.background = "white";
+    let result = playTurn();
+    let playerWin = result[0];
+    let computerWin = result[1];
+    if (playerWin) {
+        scoreP ++;
+    }
+    if(computerWin) {
+        scoreC ++;  
+    }
+    if(scoreC == 5 || scoreP == 5) {
+        victory(scoreP, scoreC);
+        scoreC = 0;
+        scoreP = 0;
+    }
 });
+
+function victory(sp, sc) {
+    if (sp == 5) {
+        display.innerText = `you win! you got: ${sp} computer got: ${sc}`;
+        display.style.background = "green";
+    }
+    if (sc == 5) {
+        display.innerText = `computer win! computer got: ${sc} you got: ${sp}`;
+        display.style.background = "red";
+    }
+}
+
+
 
 function playTurn() {
     let computer_selection = computerPlay();
     user_selection = user_input;
-    let didPlayerWin = playRound(user_selection, computer_selection);
+    let result = playRound(user_selection, computer_selection);
+    return result;
 }
 
 /*
@@ -49,57 +108,57 @@ function computerPlay() {
 function playRound(playerSelection, computerSelection) {
     playerSelection = playerSelection.toLowerCase();
     computerSelection = computerSelection.toLowerCase();
+    let resultArr = [];
     let didPlayerWin = false;
-    if(playerSelection=="rock" && computerSelection=="paper") {
-        console.log("You lose! Paper beats Rock!");
-    } else if(playerSelection=="rock" && computerSelection=="scissors") {
-        console.log("You win! Rock beats Scissors!");
-        didPlayerWin = true;
-    } else if(playerSelection=="rock" && computerSelection=="rock") {
-        console.log("DRAW!");
-    } else if(playerSelection=="paper" && computerSelection=="scissors") {
-        console.log("You Lose! Scissors beats Paper!");
-    } else if(playerSelection=="paper" && computerSelection=="rock") {
-        console.log("You win! Paper beats Rock!");
-        didPlayerWin = true;
-    } else if(playerSelection=="paper" && computerSelection=="paper") {
-        console.log("DRAW!");
-    } else if(playerSelection=="scissors" && computerSelection=="scissors") {
-        console.log("DRAW!");
-    } else if(playerSelection=="scissors" && computerSelection=="rock") {
-        console.log("You Lose! Rock beats scissors");
-    } else if(playerSelection=="scissors" && computerSelection=="paper") {
-        console.log("You win! Scissors beats Paper!");
-        didPlayerWin = true;
-    } else {
-        console.log("something is wrong!");
-    }
-    return didPlayerWin;
-}
+    let didComputerWin = false;
+    resultArr[0] = didPlayerWin;
+    resultArr[1] = didComputerWin;
 
-/*
- * this function will run other functions and will allow the user to play
- * five rounds of the game. Then will calculate the score and will decide
- * if you the player wins or loses.
- */
-function game() {
-    let scoresP = 0;
-    let scoresC = 0;
-    for(let i=0; i<5; i++) {
-        let user_input = prompt("Enter your choice!");
-        let computer_input = computerPlay();
-        if(playRound(user_input, computer_input)) {
-            scoresP++;
-        }else{
-            scoresC++;
-        }
-    }
-    console.log("---------------");
-    if(scoresP > scoresC) {
-        console.log("You win!");
-    } else if(scoresP < scoresC) {
-        console.log("You Lose!");
+    if(playerSelection=="rock" && computerSelection=="paper") {
+        display.innerText = "You lose! Paper beats Rock!";
+        didPlayerWin = true;
+        didComputerWin = false;
+        resultArr[0] = didPlayerWin;
+        resultArr[1] = didComputerWin;
+
+    } else if(playerSelection=="rock" && computerSelection=="scissors") {
+        display.innerText = "You win! Rock beats Scissors!";
+        didPlayerWin = true;
+        didComputerWin = false;
+        resultArr[0] = didPlayerWin;
+        resultArr[1] = didComputerWin;
+    } else if(playerSelection=="rock" && computerSelection=="rock") {
+        display.innerText = "DRAW!";
+    } else if(playerSelection=="paper" && computerSelection=="scissors") {
+        display.innerText = "You Lose! Scissors beats Paper!";
+        didComputerWin = true;
+        didPlayerWin = false;
+        resultArr[0] = didPlayerWin;
+        resultArr[1] = didComputerWin;
+    } else if(playerSelection=="paper" && computerSelection=="rock") {
+        display.innerText = "You win! Paper beats Rock!";
+        didPlayerWin = true;
+        didComputerWin = false;
+        resultArr[0] = didPlayerWin;
+        resultArr[1] = didComputerWin;
+    } else if(playerSelection=="paper" && computerSelection=="paper") {
+        display.innerText = "DRAW!";
+    } else if(playerSelection=="scissors" && computerSelection=="scissors") {
+        display.innerText = "DRAW!";
+    } else if(playerSelection=="scissors" && computerSelection=="rock") {
+        display.innerText = "You Lose! Rock beats scissors";
+        didComputerWin = true;
+        didPlayerWin = false;
+        resultArr[0] = didPlayerWin;
+        resultArr[1] = didComputerWin;
+    } else if(playerSelection=="scissors" && computerSelection=="paper") {
+        display.innerText = "You win! Scissors beats Paper!";
+        didPlayerWin = true;
+        didComputerWin = false;
+        resultArr[0] = didPlayerWin;
+        resultArr[1] = didComputerWin;
     } else {
-        console.log("DRAW!");
+        display.innerText = "something is wrong!";
     }
+    return resultArr;
 }
