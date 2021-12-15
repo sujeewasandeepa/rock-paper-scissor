@@ -1,3 +1,29 @@
+const rock = document.querySelector('#rock');
+const paper = document.querySelector('#paper');
+const scissors = document.querySelector('#scissors');
+const display = document.querySelector('#display');
+
+let user_input;
+
+rock.addEventListener('click', () => {
+    user_input = "rock";
+    playTurn();
+});
+paper.addEventListener('click', () => {
+    user_input = "paper";
+    playTurn();
+});
+scissors.addEventListener('click', () => {
+    user_input = "scissors";
+    playTurn();
+});
+
+function playTurn() {
+    let computer_selection = computerPlay();
+    user_selection = user_input;
+    let didPlayerWin = playRound(user_selection, computer_selection);
+}
+
 /*
  * This function will make the computer choose either rock, paper
  * or scissors randomly.
